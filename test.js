@@ -1,71 +1,40 @@
-// Desktop screen width
-if(screen.width > 800 && !document.getElementById("mobile-form").innerHTML === "")
-{
-	document.getElementById("desktop-form").innerHTML = document.getElementById("mobile-form").innerHTML;
+var realId = document.getElementsByClassName("datepicker medium mdy datepicker_no_icon hasDatepicker")[0].id;
+var formHTML = document.getElementById("desktop-form").innerHTML;
+if ($(window).width() > 800) {
+    document.getElementById("mobile-form").innerHTML = ""
+} else {
+    document.getElementById("mobile-form").innerHTML = document.getElementById("desktop-form").innerHTML;
 }
-// Mobile screen width
-else
-{
-	document.getElementById("mobile-form").innerHTML = document.getElementById("desktop-form").innerHTML;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$( window ).resize(function() {
-	// Desktop screen width
-	if(screen.width > 800)
-	{
-		try {
-			console.log("Desktop.");
-			if(document.getElementById("mobile-form").innerHTML === "")
-			{
-				console.log("Desktop 1");
-			}
-			else
-			{
-				console.log("Desktop 2");
-				document.getElementById("desktop-form").innerHTML = document.getElementById("mobile-form").innerHTML;
-			}
-		}
-		catch(err) {
-		}
-	}
-	// Mobile screen width
-	else
-	{
-		try {
-			console.log("Mobile.");
-			if(document.getElementById("desktop-form").innerHTML === "")
-			{
-				console.log("Mobile 1");
-			}
-			else
-			{
-				console.log("Mobile 2");
-				document.getElementById("mobile-form").innerHTML = document.getElementById("desktop-form").innerHTML;
-			}
-		}
-		catch(err) {
-		}
-	}
+$(window).resize(function() {
+    if ($(window).width() > 800) {
+        try {
+            console.log("Desktop.");
+            if (document.getElementById("mobile-form").innerHTML === "") {
+                console.log("Desktop 1")
+            } else {
+                console.log("Desktop 2");
+                document.getElementById("desktop-form").innerHTML = document.getElementById("mobile-form").innerHTML;
+                document.getElementById("mobile-form").innerHTML = "";
+                document.getElementsByClassName("datepicker medium mdy datepicker_no_icon hasDatepicker")[0].id = "stop";
+                document.getElementsByClassName("datepicker medium mdy datepicker_with_icon hasDatepicker")[1].id = realId
+            }
+        } catch (err) {}
+    } else {
+        try {
+            console.log("Mobile.");
+            if (document.getElementById("desktop-form").innerHTML === "") {
+                console.log("Mobile 1")
+                                document.getElementById("mobile-form").innerHTML = formHTML;
+                                document.getElementsByClassName("datepicker medium mdy datepicker_with_icon hasDatepicker")[0].id = realId
+            } else {
+                console.log("Mobile 2");
+                document.getElementById("mobile-form").innerHTML = formHTML;
+                document.getElementById("desktop-form").innerHTML = "";
+                document.getElementsByClassName("datepicker medium mdy datepicker_with_icon hasDatepicker")[0].id = realId
+            }
+        } catch (err) {}
+    }
 });
-
 
 document.body.innerHTML = "<h1>Test 2</h1>";
 document.getElementById("someId");
